@@ -19,7 +19,7 @@ poly <- train[, unlist(fromJSON(polyline)), by=id]
 poly[, r:=(1:.N)%%2]
 poly[, r2:=(1:.N)]
 setkey(poly, id)
-poly[r==0, r2:=r2-1]
+poly[r==0, r2:=r2-1L]
 poly <- merge(poly[r==1, list(id, r2, lon=V1)], poly[r==0, list(id, r2, lat=V1)], by=c('id', 'r2'), all=T)
 poly[, r2:=NULL]
 
