@@ -14,10 +14,12 @@ setnames(train, c('trip', 'start_time', 'incomplete', 'polyline', 'id'))
 train <- train[incomplete!='True' & polyline!='[]']
 
 ### CONVERT POLYLINE TO LONG TABLE(id, lon, lat)
+setkey(train, id)
 poly <- train[, unlist(fromJSON(polyline)), by=id]
 poly[, r:=(1:.N)%%2]
 poly[, r2:=(1:.N)]
-poly[r==0, r2:=r2-1L]
+setkey(poly, id)
+poly[r==0, r2:=r2-1]
 poly <- merge(poly[r==1, list(id, r2, lon=V1)], poly[r==0, list(id, r2, lat=V1)], by=c('id', 'r2'), all=T)
 poly[, r2:=NULL]
 
