@@ -17,9 +17,9 @@ In addition, the trips available for matching is limited by the type of trip.  F
 * Angle between the last bearing
 
 ## Dependencies
-* R version 3.1+
+* R version 3.2.1
 * R packages
-  * data.table
+  * data.table 1.9.5
 
 ## Run
 Requires unzipped train.csv and test.csv.  Run util.R -> read_data.R -> lookup.R
