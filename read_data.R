@@ -15,7 +15,7 @@ train <- train[incomplete!='True' & polyline!='[]']
 
 ### CONVERT POLYLINE TO LONG TABLE(id, lon, lat)
 setkey(train, id)
-poly <- train[, transpose(unlist(fromJSON(polyline))), by=id]
+poly <- train[, transpose(fromJSON(polyline)), by=id]
 setnames(poly, c('id', 'lon', 'lat'))
 
 train[, c('incomplete', 'polyline'):=NULL]
